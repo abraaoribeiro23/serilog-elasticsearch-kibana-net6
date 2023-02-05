@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ILogger = Serilog.ILogger;
 
 namespace Application.Controllers
 {
@@ -11,9 +12,9 @@ namespace Application.Controllers
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger logger)
         {
             _logger = logger;
         }
@@ -21,10 +22,10 @@ namespace Application.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            _logger.LogInformation("Hi! This is a INFORMATION Log.");
-            _logger.LogDebug("Hi! This is a DEBUG Log.");
-            _logger.LogWarning("Hi! This is a WARNING Log.");
-            _logger.LogError("Hi! This is a ERROR Log.");
+            _logger.Information("Hi! This is a INFORMATION Log.");
+            _logger.Debug("Hi! This is a DEBUG Log.");
+            _logger.Warning("Hi! This is a WARNING Log.");
+            _logger.Error("Hi! This is a ERROR Log.");
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
